@@ -12,19 +12,13 @@ async function seed() {
   // spayNeuter: {type: Boolean, required: true},
   // location: {type: String, required: true}
   await Cat.create({
-    name: 'Dot',
-    color: 'Black and White',
-    spayNeuter: true,
-    location: 'hammock'
-  });
-  console.log('Dot was added to the database');
+    title: 'To Bob',
+    description: 'Lorum ipsum',
+});
   await Cat.create({
-    name: 'Ginger',
-    color: 'Brindle',
-    spayNeuter: true,
-    location: 'front porch'
+    title: 'To Ginger',
+    description: 'Lorum ipsum',
   });
-  console.log('Ginger was added to the database');
   mongoose.disconnect();
 }
 
