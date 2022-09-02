@@ -12,7 +12,7 @@ Backend server that allows requests, edits and additions to a database, as well 
 
 
 ## Architecture
-Ill be using mongoose, express to pass get, put and delete requests
+We'll be using mongoose, express to pass get, put and delete requests
 
 
 ## Change Log
