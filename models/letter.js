@@ -9,6 +9,7 @@ const { Schema } = mongoose;
 // create a cat schema, define how our object will be structured
 const letterSchema = new Schema({
   title: {type: String, required: true},
+  recipient: {type: String, required: true},
   text: {type: String, required: true},
 });
 
