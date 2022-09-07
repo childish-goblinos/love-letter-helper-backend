@@ -10,8 +10,9 @@ const { Schema } = mongoose;
 const LetterSchema = new Schema({
   title: {type: String, required: true},
   recipient: {type: String, required: true},
-  body: {type: String, required: true},
-  email: {type: String, required: true}
+  letterBody: {type: String, required: true},
+  email: {type: String, required: true},
+  scoreText: {type:String, required: false}
 });
 
 // define the model
