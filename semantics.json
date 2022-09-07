@@ -1,0 +1,86 @@
+[
+  {
+    "score": 1,
+    "association": "A+, Well Done, this is perfect"
+  },
+  {
+    "score": 0.9,
+    "association": "Nearly Perfect"
+  },
+  {
+    "score": 0.8,
+    "association": "You have articulated very well how much you like the recipient"
+  },
+  {
+    "score": 0.7,
+    "association": "Gleaming with niceties"
+  },
+  {
+    "score": 0.6,
+    "association": "This is nicely written"
+  },
+  {
+    "score": 0.5,
+    "association": "You have a good relation with the recipient of this letter"
+  },
+  {
+    "score": 0.4,
+    "association": "If you hit send, the reader would like it a little"
+  },
+  {
+    "score": 0.3,
+    "association": "Acceptable"
+  },
+  {
+    "score": 0.2,
+    "association": "On the road to improvement"
+  },
+  {
+    "score": 0.1,
+    "association": "Not that "
+  },
+  {
+    "score": 0,
+    "association": "True neutral"
+  },
+  {
+    "score": -0.1,
+    "association": "Its ok"
+  },
+  {
+    "score": -0.2,
+    "association": "Not where it needs to be"
+  },
+  {
+    "score": -0.3,
+    "association": "Seems a bit rude"
+  },
+  {
+    "score": -0.4,
+    "association": "Its outputting, rude"
+  },
+  {
+    "score": -0.5,
+    "association": "You're insulting whomever is supposed to read this"
+  },
+  {
+    "score": -0.6,
+    "association": "You must not like this person one bit!"
+  },
+  {
+    "score": -0.7,
+    "association": "The recipient of this letter must have shot your pet"
+  },
+  {
+    "score": -0.8,
+    "association": "Undeniably rude and quite evil"
+  },
+  {
+    "score": -0.9,
+    "association": "This is meant for Hitler right?"
+  },
+  {
+    "score": -1,
+    "association": "Truly terrible, the most rude thing I've ever seen!"
+  }
+]
