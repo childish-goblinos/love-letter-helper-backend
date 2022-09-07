@@ -6,11 +6,6 @@ mongoose.connect(process.env.DB_URL);
 const Letter = require('./models/letter.js');
 
 async function seed() {
-  // structure the same as our Cat Schema
-  // name: {type: String, required: true},
-  // color: {type: String, required: true},
-  // spayNeuter: {type: Boolean, required: true},
-  // location: {type: String, required: true}
   await Letter.create({
     title: 'To gf',
     recipient: 'Nia',
