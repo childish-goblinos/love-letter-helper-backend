@@ -41,7 +41,7 @@ function verifyUser(req, errorFirstOrUserCallback)
     // we .split(), so we can remove the `Bearer` from the request
     // target [1], because we just want to get the second 'word' (which is the token itself) from the request
     const token = req.headers.authorization.split(' ')[1];
-    console.log(token);
+    //console.log(token);
 
     // the `.verify()` method is from the jwt package we imported/required
     // `getKey` is the function above this one, from the jwt docs
