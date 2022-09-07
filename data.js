@@ -8,7 +8,7 @@ const Data = { };
 //Takes a query in the form of (http://localhost:3001/letters?title=<Your title here>)
 Data.getLetters = async(req,res,next) => {
   try {
-    let results = await Letter.find({'email': req.body.email});
+    let results = await Letter.find({'email': req.headers.email});
     res.status(200).send(results);
   } catch (err) {
     next(err.message);
