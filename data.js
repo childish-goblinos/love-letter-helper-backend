@@ -27,52 +27,41 @@ verifyUser(req, async (err, user) =>
 });
 */
 //Takes a query in the form of (http://localhost:3001/letters?title=<Your title here>)
-Data.getLetters = async (req, res, next) =>
-{
-  verifyUser(req, async (err, user) =>
-  {
+Data.getLetters = async (req, res, next) => {
+  verifyUser(req, async (err, user) => {
     // error first, approach
-    if (err)
-    {
+    if (err) {
       console.log(err);
       // let the front-end know that their token is bunk
       res.send('Your token is invalid, my beast 👀');
     }
-    else
-    {
-      try
-      {
+    else {
+      try {
         let results = await Letter.find({ 'email': req.headers.email });
         res.status(200).send(results);
       }
-      catch (err)
-      {
+      catch (err) {
         next(err.message);
       }
     }
   });
 }
 
-Data.getSentiment = async (req, res) =>
-{
-  verifyUser(req, async (err, user) =>
-  {
+Data.getSentiment = async (req, res) => {
+  verifyUser(req, async (err, user) => {
     // error first, approach
-    if (err)
-    {
+    if (err) {
       console.log(err);
       // let the front-end know that their token is bunk
       res.send('invalid token');
     }
-    else
-    {
-      try
-      {
-        let url = `https://api.api-ninjas.com/v1/sentiment?text=${ req.query.text }`;
+    else {
+      try {
+        let url = `https://api.api-ninjas.com/v1/sentiment?text=${req.query.text}`;
 
         let results = await axios.get(url, {
           headers: {
-            'X-API-Key': `${ process.env.REACT_API_KEY }`
+            'X-API-Key': `${process.env.REACT_API_KEY}`
           }
         });
         //lets remove the text block so we aren't sending over text we already have
@@ -83,106 +72,90 @@ Data.getSentiment = async (req, res) =>
 
         //for the array of Semantics adds the matching scores semantic to the results we send.
         results.data.score = roundedScore;
-        for (let i in Semantics)
-        {
+        for (let i in Semantics) {
           console.log(Semantics[i])
-          if (Semantics[i].score === roundedScore)
-          {
+          if (Semantics[i].score === roundedScore) {
             results.data.grade = Semantics[i].association;
             break;
           }
         }
         res.send(results.data);
       }
-      catch (err)
-      {
+      catch (err) {
         res.send(err.message);
       }
     }
   });
 }
 
-Data.deleteAnItem = async (req, res) =>
-{
-  verifyUser(req, async (err, user) =>
-  {
+Data.deleteAnItem = async (req, res) => {
+  verifyUser(req, async (err, user) => {
     // error first, approach
-    if (err)
-    {
+    if (err) {
       console.log(err);
       // let the front-end know that their token is bunk
       res.send('invalid token');
     }
-    else
-    {
-      try
-      {
+    else {
+      try {
         let results = await Letter.findByIdAndDelete(req.params.id);
         res.status(200).json(results);
       }
-      catch (err)
-      {
+      catch (err) {
         res.send(err.message)
       }
     }
   });
 }
 
-Data.addAnLetter = async (req, res, next) =>
-{
+Data.addAnLetter = async (req, res, next) => {
   console.log('user is in add letter');
-  verifyUser(req, async (err, user) =>
-  {
+  verifyUser(req, async (err, user) => {
     console.log('user is verified in add letter');
     // error first, approach
-    if (err)
-    {
+    if (err) {
       console.log(err);
       // let the front-end know that their token is bunk
       res.send('invalid token');
     }
-    else
-    {
-      try
-      {
+    else {
+      try {
         const item = new Letter(req.body);
         await item.save();
         res.status(200).json(item);
       }
-      catch (err) 
-      {
+      catch (err) {
         next(err.message);
       }
     }
   });
 }
 
-Data.editALetter = async (req, res, next) =>
-{
-  try
-  {
-    const item = new Letter(req.body);
-    await item.save();
-    res.status(200).json(item);
+Data.editALetter = async (req, res, next) => {
+  verifyUser(req, async (err, user) => {
+    console.log('user is verified in add letter');
+    // error first, approach
+    if (err) {
+      console.log(err);
+      // let the front-end know that their token is bunk
+      res.send('invalid token');
+    }
+    else {
+      try {
+        let id = req.params.id;
+        let result = await Letter.findByIdAndUpdate(id, req.body, {
+          new: true,
+          overwrite: true,
+        });
+        res.status(200).send(result);
+        console.log(result)
+      }
+      catch (err) {
+        next(err);
+      }
+    }
   }
-  catch (err) 
-  {
-    next(err.message);
-  }
-  try
-  {
-    let id = req.params.id;
-    let result = await Letter.findByIdAndUpdate(id, req.body, {
-      new: true,
-      overwrite: true,
-    });
-    res.status(200).send(result);
-    console.log(result)
-  }
-  catch (err)
-  {
-    next(err);
-  }
+  )
 }
 
 module.exports = Data;
