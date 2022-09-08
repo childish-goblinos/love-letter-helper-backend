@@ -1,17 +1,19 @@
 # Love Letter Backend
 
-**Author**: 
-Rhea Carillo 
-Amy Pierce 
+**Author**:
+Rhea Carillo
+Amy Pierce
 Jackson Gurney
 
-**Version**: 0.1 
+**Version**: 0.1
 
 ## Overview
+
 Backend server that allows requests, edits and additions to a database, as well as acess to a api
 
 
 ## Architecture
+
 We'll be using mongoose, express to pass get, put and delete requests
 
 
