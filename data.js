@@ -48,46 +48,59 @@ Data.getLetters = async (req, res, next) => {
 }
 
 Data.getSentiment = async (req, res) => {
-  verifyUser(req, async (err, user) => {
-    // error first, approach
-    if (err) {
-      console.log(err);
-      // let the front-end know that their token is bunk
-      res.send('invalid token');
-    }
-    else {
-      try {
-        let url = `https://api.api-ninjas.com/v1/sentiment?text=${req.query.text}`;
-
-        let results = await axios.get(url, {
-          headers: {
-            'X-API-Key': `${process.env.REACT_API_KEY}`
-          }
-        });
-        //lets remove the text block so we aren't sending over text we already have
-        delete results.data.text;
-
-        // Takes the score from the API call and rounds it two a single decimal point
-        let roundedScore = Math.round(results.data.score * 10) / 10
-
-        //for the array of Semantics adds the matching scores semantic to the results we send.
-        results.data.score = roundedScore;
-        for (let i in Semantics) {
-          console.log(Semantics[i])
-          if (Semantics[i].score === roundedScore) {
-            results.data.grade = Semantics[i].association;
-            break;
-          }
-        }
-        res.send(results.data);
+  try {
+    let url = `https://api.api-ninjas.com/v1/sentiment?text=${req.query.text}`;
+    let results = await axios.get(url, {
+      headers: {
+        'X-API-Key': `${process.env.REACT_API_KEY}`
       }
-      catch (err) {
-        res.send(err.message);
+    });
+    //lets remove the text block so we aren't sending over text we already have
+    delete results.data.text;
+    // Takes the score from the API call and rounds it two a single decimal point
+    let roundedScore = Math.round(results.data.score * 10) / 10
+    //for the array of Semantics adds the matching scores semantic to the results we send.
+    results.data.score = roundedScore;
+    for (let i in Semantics) {
+      console.log(Semantics[i])
+      if (Semantics[i].score === roundedScore) {
+        results.data.grade = Semantics[i].association;
+        break;
       }
     }
-  });
+    res.send(results.data);
+  }
+  catch (err) {
+    res.send(err.message);
+  }
 }
-
+Data.getSentiment = async (req, res) => {
+  try {
+    let url = `https://api.api-ninjas.com/v1/sentiment?text=${req.query.text}`;
+    let results = await axios.get(url, {
+      headers: {
+        'X-API-Key': `${process.env.REACT_API_KEY}`
+      }
+    });
+    //lets remove the text block so we aren't sending over text we already have
+    delete results.data.text;
+    // Takes the score from the API call and rounds it two a single decimal point
+    let roundedScore = Math.round(results.data.score * 10) / 10
+    //for the array of Semantics adds the matching scores semantic to the results we send.
+    results.data.score = roundedScore;
+    for (let i in Semantics) {
+      console.log(Semantics[i])
+      if (Semantics[i].score === roundedScore) {
+        results.data.grade = Semantics[i].association;
+        break;
+      }
+    }
+    res.send(results.data);
+  }
+  catch (err) {
+    res.send(err.message);
+  }
+}
 Data.deleteAnItem = async (req, res) => {
   verifyUser(req, async (err, user) => {
     // error first, approach
