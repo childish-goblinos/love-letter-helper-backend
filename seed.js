@@ -3,21 +3,27 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DB_URL);
-const Cat = require('./models/cat.js');
+const Letter = require('./models/letter.js');
 
-async function seed() {
-  // structure the same as our Cat Schema
-  // name: {type: String, required: true},
-  // color: {type: String, required: true},
-  // spayNeuter: {type: Boolean, required: true},
-  // location: {type: String, required: true}
-  await Cat.create({
-    title: 'To Bob',
-    description: 'Lorum ipsum',
-});
-  await Cat.create({
-    title: 'To Ginger',
-    description: 'Lorum ipsum',
+async function seed()
+{
+  await Letter.create({
+    title: 'To gf',
+    recipient: 'Nia',
+    body: 'Have a nice day',
+    email: 'jacko7557@gmail.com'
+  });
+  await Letter.create({
+    title: 'To my enemies',
+    recipient: 'Haters',
+    body: 'Hate you',
+    email: 'jacko7557@gmail.com'
+  });
+  await Letter.create({
+    title: 'Dear Darla',
+    recipient: 'Darla',
+    body: `'I hate ur stinkin' guts! You make me vomit. You're the scum between my toes. Love, Grandma <3`,
+    email: 'rheamimicarillo@gmail.com'
   });
   mongoose.disconnect();
 }
